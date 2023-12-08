@@ -14,7 +14,7 @@ $sheetId = '1Pt6VS4sVkgVdFl23WRNHtcjNDU6Gpuybme2fTQ38WdU';
 foreach ($gids as $filename => $gid) {
     $sheetUrl = 'https://docs.google.com/spreadsheets/d/' . $sheetId . '/export?format=csv&id=' . $sheetId . '&gid=' . $gid;
     $csv = file_get_contents($sheetUrl);
-    // print($csv);
+    print ('Fetching ' . $filename . PHP_EOL);
     $file = "./csv/" . $filename . ".csv";
     file_put_contents($file, $csv);
 }
