@@ -1,4 +1,7 @@
 <?php
+// fetch content from google sheets:
+// https://docs.google.com/spreadsheets/d/1Pt6VS4sVkgVdFl23WRNHtcjNDU6Gpuybme2fTQ38WdU/edit#gid=1001060475
+
 $gids = array(
         "Art" => "296735077",
         "Music" => "4719631",
