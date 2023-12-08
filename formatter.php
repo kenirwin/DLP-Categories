@@ -17,6 +17,7 @@
 $dir = "./csv/";
 $files = scandir($dir);
 foreach ($files as $file) {
+    print '<div class="subject-list">'.PHP_EOL;
     if (preg_match('/.csv/', $file)) {
         $dataFile = $dir . $file;
         $GLOBALS['listIsOpen'] = false;
@@ -24,26 +25,27 @@ foreach ($files as $file) {
         $GLOBALS['level3ListIsOpen'] = false;
 
             /* Map Rows and Loop Through Them */
-$rows   = array_map('str_getcsv', file($dataFile));
-$header = array_shift($rows);
-$csv    = array();
-foreach($rows as $row) {
-    $csv[] = array_combine($header, $row);
-}
+        $rows   = array_map('str_getcsv', file($dataFile));
+        $header = array_shift($rows);
+        $csv    = array();
+        foreach($rows as $row) {
+            $csv[] = array_combine($header, $row);
+        }
 
-foreach ($csv as $line) {
-    // print('line: ');
-    print(Formatter($line).PHP_EOL);
-    // var_dump($line);
-}
-if ($GLOBALS['subListIsOpen']) {
-    print '    </ul>'.PHP_EOL;
-}   
-if ($GLOBALS['listIsOpen']) {
-    print '</ul>'.PHP_EOL;
-}
+        foreach ($csv as $line) {
+            // print('line: ');
+            print(Formatter($line).PHP_EOL);
+            // var_dump($line);
+        }
+        if ($GLOBALS['subListIsOpen']) {
+            print '    </ul>'.PHP_EOL;
+        }   
+        if ($GLOBALS['listIsOpen']) {
+            print '</ul>'.PHP_EOL;
+        }
     }
-print '<hr>'.PHP_EOL;
+    print '</div>'.PHP_EOL;
+    print '<hr>'.PHP_EOL;
 }
 
 
@@ -127,7 +129,7 @@ function Formatter($line) {
         $item = AddLink($item);
         if ($GLOBALS['listIsOpen'] == false) {
             $GLOBALS['listIsOpen'] = true;
-            return $prepend.'<ul class="item">'.PHP_EOL.'  <li>' . $item . '</li>';
+            return $prepend.'<ul class="items">'.PHP_EOL.'  <li>' . $item . '</li>';
         }
         return $prepend.'  <li>' . $item . '</li>';
     }
@@ -136,7 +138,7 @@ function Formatter($line) {
         $subItem = AddLink($subItem);
         if ($GLOBALS['subListIsOpen'] == false) {
             $GLOBALS['subListIsOpen'] = true;
-            return $prepend.'    <ul class="subitem">'.PHP_EOL.'      <li>' . $subItem . '</li>';
+            return $prepend.'    <ul class="subitems">'.PHP_EOL.'      <li>' . $subItem . '</li>';
         }
         return $prepend.'      <li>' . $subItem . '</li>';
     }
@@ -145,7 +147,7 @@ function Formatter($line) {
         $itemLevel3 = AddLink($itemLevel3);
         if ($GLOBALS['level3ListIsOpen'] == false) {
             $GLOBALS['level3ListIsOpen'] = true;
-            return $prepend.'          <ul class="level-3">'.PHP_EOL.'            <li>' . $itemLevel3 . '</li>';
+            return $prepend.'          <ul class="level-3s">'.PHP_EOL.'            <li>' . $itemLevel3 . '</li>';
         }
         return $prepend.'            <li>' . $itemLevel3 . '</li>';
     }
