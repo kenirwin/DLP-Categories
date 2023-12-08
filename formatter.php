@@ -50,7 +50,12 @@ function LineIsBlank($line) {
     return $blank;
 }
 function AddLink($item) {
-    $slug = strtolower(str_replace(' ', '+', $item));
+    if ($GLOBALS['LinkTextOverride'] != null) {
+        $slug = strtolower(str_replace(' ', '+', $GLOBALS['LinkTextOverride']));
+    } 
+    else {
+        $slug = strtolower(str_replace(' ', '+', $item));
+    }
     $link = '<a href="' . $slug . '">' . $item . '</a>';
     return $link;
 }
@@ -61,13 +66,15 @@ function Formatter($line) {
     // PageTitle
     // Category
     // DontLinkCat
-    // Subcategory
+    // SubCategory
     // SubCatIsLink
     // Item
     // SubItem
-    // ItemLevel3    
-
+    // ItemLevel3  
+    // LinkTextOverride  
+    $GLOBALS['LinkTextOverride'] = $line['LinkTextOverride'];
     // dumb workaround:
+    // I don't know why $line['PageTitle'] isn't working
     $keys = array_keys($line);  
     for ($i = 0; $i < count($keys); $i++) {
         if (preg_match('/PageTitle/', $keys[$i]) && $line[$keys[$i]] != null) {
@@ -97,6 +104,13 @@ function Formatter($line) {
             $category = AddLink($category);
         }
         return $prepend . '<h2>' . $category . '</h2>';
+    }
+    if (($line['SubCategory']) != null) {
+        $SubCategory = $line['SubCategory'];
+        if (! $line['SubCatNotLink'] == 1) {
+            $SubCategory = AddLink($SubCategory);
+        }
+        return $prepend . '<h3>' . $SubCategory . '</h3>';
     }
     if (($line['Item']) != null) {
         $item = $line['Item'];
