@@ -1,7 +1,43 @@
 <?php
-$dataFile = "dlp-data.csv";
-$GLOBALS['listIsOpen'] = false;
-$GLOBALS['subListIsOpen'] = false;
+// $dataFile = "dlp-data.csv";
+
+// foreach file in csv directory
+//   get filename
+// help me write this
+$dir = "./csv/";
+$files = scandir($dir);
+foreach ($files as $file) {
+    if (preg_match('/.csv/', $file)) {
+        $dataFile = $dir . $file;
+        $GLOBALS['listIsOpen'] = false;
+        $GLOBALS['subListIsOpen'] = false;
+        $GLOBALS['level3ListIsOpen'] = false;
+
+            /* Map Rows and Loop Through Them */
+$rows   = array_map('str_getcsv', file($dataFile));
+$header = array_shift($rows);
+$csv    = array();
+foreach($rows as $row) {
+    $csv[] = array_combine($header, $row);
+}
+
+foreach ($csv as $line) {
+    // print('line: ');
+    print(Formatter($line).PHP_EOL);
+    // var_dump($line);
+}
+if ($GLOBALS['subListIsOpen']) {
+    print '    </ul>'.PHP_EOL;
+}   
+if ($GLOBALS['listIsOpen']) {
+    print '</ul>'.PHP_EOL;
+}
+    }
+print '<hr>'.PHP_EOL;
+}
+
+
+
 
 function LineIsBlank($line) {
     $blank = true;
@@ -29,6 +65,7 @@ function Formatter($line) {
     // SubCatIsLink
     // Item
     // SubItem
+    // ItemLevel3    
 
     // dumb workaround:
     $keys = array_keys($line);  
@@ -41,6 +78,10 @@ function Formatter($line) {
     // end dumb workaround
 
     $prepend = '';
+    if ($GLOBALS['level3ListIsOpen'] && ($line['ItemLevel3'] == null)) {
+        $GLOBALS['level3ListIsOpen'] = false;
+        $prepend .= '          </ul>'.PHP_EOL;
+    }
     if ($GLOBALS['subListIsOpen'] && ($line['SubItem'] == null)) {
         $GLOBALS['subListIsOpen'] = false;
         $prepend .= '    </ul>'.PHP_EOL;
@@ -62,7 +103,7 @@ function Formatter($line) {
         $item = AddLink($item);
         if ($GLOBALS['listIsOpen'] == false) {
             $GLOBALS['listIsOpen'] = true;
-            return $prepend.'<ul>'.PHP_EOL.'  <li>' . $item . '</li>';
+            return $prepend.'<ul class="item">'.PHP_EOL.'  <li>' . $item . '</li>';
         }
         return $prepend.'  <li>' . $item . '</li>';
     }
@@ -71,29 +112,20 @@ function Formatter($line) {
         $subItem = AddLink($subItem);
         if ($GLOBALS['subListIsOpen'] == false) {
             $GLOBALS['subListIsOpen'] = true;
-            return '    <ul>'.PHP_EOL.'      <li>' . $subItem . '</li>';
+            return $prepend.'    <ul class="subitem">'.PHP_EOL.'      <li>' . $subItem . '</li>';
         }
-        return '      <li>' . $subItem . '</li>';
+        return $prepend.'      <li>' . $subItem . '</li>';
+    }
+    if (($line['ItemLevel3']) != null) { 
+        $itemLevel3 = $line['ItemLevel3'];
+        $itemLevel3 = AddLink($itemLevel3);
+        if ($GLOBALS['level3ListIsOpen'] == false) {
+            $GLOBALS['level3ListIsOpen'] = true;
+            return $prepend.'          <ul class="level-3">'.PHP_EOL.'            <li>' . $itemLevel3 . '</li>';
+        }
+        return $prepend.'            <li>' . $itemLevel3 . '</li>';
     }
 }
 
-/* Map Rows and Loop Through Them */
-$rows   = array_map('str_getcsv', file($dataFile));
-$header = array_shift($rows);
-$csv    = array();
-foreach($rows as $row) {
-    $csv[] = array_combine($header, $row);
-}
 
-foreach ($csv as $line) {
-    // print('line: ');
-    print(Formatter($line).PHP_EOL);
-    // var_dump($line);
-}
-if ($GLOBALS['subListIsOpen']) {
-    print '    </ul>'.PHP_EOL;
-}   
-if ($GLOBALS['listIsOpen']) {
-    print '</ul>'.PHP_EOL;
-}
 // var_dump($csv);
