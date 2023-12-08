@@ -1,9 +1,19 @@
+<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        $('a').attr('target', 'dlp');
+        $('a').each(function() {
+            var href = $(this).attr('href');
+            if (href != null) {
+                if (! href.match(/http/)) {
+                    $(this).attr('href', 'https://ulblwebp09.lib.miamioh.edu' + href);
+                }
+            }
+        })
+    })
+</script>
 <?php
-// $dataFile = "dlp-data.csv";
-
 // foreach file in csv directory
-//   get filename
-// help me write this
 $dir = "./csv/";
 $files = scandir($dir);
 foreach ($files as $file) {
