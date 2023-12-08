@@ -1,6 +1,10 @@
 <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
+        $('span').each(function() {
+            var section = $(this).attr('data-section');
+            $(this).html('<h1>' + section + '</h1>');
+        });
         $('a').attr('target', 'dlp');
         $('a').each(function() {
             var href = $(this).attr('href');
@@ -90,7 +94,7 @@ function Formatter($line) {
     $keys = array_keys($line);  
     for ($i = 0; $i < count($keys); $i++) {
         if (preg_match('/PageTitle/', $keys[$i]) && $line[$keys[$i]] != null) {
-            print '<h1>' . $line[$keys[$i]] . '</h1>'.PHP_EOL;
+            print '<span data-section="' . $line[$keys[$i]] . '"></span>'.PHP_EOL;
         }
         
     }
