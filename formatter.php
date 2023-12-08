@@ -50,13 +50,13 @@ function LineIsBlank($line) {
     return $blank;
 }
 function AddLink($item) {
-    if ($GLOBALS['LinkTextOverride'] != null) {
-        $slug = strtolower(str_replace(' ', '+', $GLOBALS['LinkTextOverride']));
+    if ($GLOBALS['LinkOverride'] != null) {
+        $slug = strtolower(str_replace(' ', '+', $GLOBALS['LinkOverride']));
     } 
     else {
         $slug = strtolower(str_replace(' ', '+', $item));
     }
-    $link = '<a href="' . $slug . '">' . $item . '</a>';
+    $link = '<a href="/picturebook/items/browse?tags=' . $slug . '">' . $item . '</a>';
     return $link;
 }
 function Formatter($line) {
@@ -71,8 +71,8 @@ function Formatter($line) {
     // Item
     // SubItem
     // ItemLevel3  
-    // LinkTextOverride  
-    $GLOBALS['LinkTextOverride'] = $line['LinkTextOverride'];
+    // LinkOverride  
+    $GLOBALS['LinkOverride'] = $line['LinkOverride'];
     // dumb workaround:
     // I don't know why $line['PageTitle'] isn't working
     $keys = array_keys($line);  
