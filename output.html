@@ -1,6 +1,10 @@
 <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
+        $('span').each(function() {
+            var section = $(this).attr('data-section');
+            $(this).html('<h1>' + section + '</h1>');
+        });
         $('a').attr('target', 'dlp');
         $('a').each(function() {
             var href = $(this).attr('href');
@@ -19,7 +23,7 @@
 </div>
 <hr>
 <div class="subject-list">
-<h1>Art</h1>
+<span data-section="Art"></span>
 <h2><a href="/picturebook/items/browse?tags=architecture">Architecture</a></h2>
 <ul class="items">
   <li><a href="/picturebook/items/browse?tags=bridge">Bridge</a></li>
@@ -57,7 +61,7 @@
 </div>
 <hr>
 <div class="subject-list">
-<h1>Health Education</h1>
+<span data-section="Health Education"></span>
 
 <h2><a href="/picturebook/items/browse?tags=aging">Aging</a></h2>
 <ul class="items">
@@ -435,7 +439,7 @@
 </div>
 <hr>
 <div class="subject-list">
-<h1>Language Arts</h1>
+<span data-section="Language Arts"></span>
 
 <h2><a href="/picturebook/items/browse?tags=characters">Characters</a></h2>
 <ul class="items">
@@ -509,35 +513,29 @@
   <li><a href="/picturebook/items/browse?tags=skills">Skills</a></li>
     <ul class="subitems">
       <li><a href="/picturebook/items/browse?tags=interpretation">Interpretation</a></li>
-    </ul>
-</ul>
           <ul class="level-3s">
             <li><a href="/picturebook/items/browse?tags=literal+interpretation">Literal Interpretation</a></li>
           </ul>
-    <ul class="subitems">
       <li><a href="/picturebook/items/browse?tags=listening">Listening</a></li>
       <li><a href="/picturebook/items/browse?tags=reading">Reading</a></li>
       <li><a href="/picturebook/items/browse?tags=speaking">Speaking</a></li>
       <li><a href="/picturebook/items/browse?tags=spelling">Spelling</a></li>
-    </ul>
           <ul class="level-3s">
             <li><a href="/picturebook/items/browse?tags=alliteration">Alliteration</a></li>
           </ul>
-    <ul class="subitems">
       <li><a href="/picturebook/items/browse?tags=storytelling">Storytelling</a></li>
-    </ul>
           <ul class="level-3s">
             <li><a href="/picturebook/items/browse?tags=foreshadowing">Foreshadowing</a></li>
             <li><a href="/picturebook/items/browse?tags=metaphor">Metaphor</a></li>
             <li><a href="/picturebook/items/browse?tags=resolution">Resolution</a></li>
           </ul>
-    <ul class="subitems">
       <li><a href="/picturebook/items/browse?tags=writing">Writing</a></li>
-    </ul>
           <ul class="level-3s">
             <li><a href="/picturebook/items/browse?tags=diary">Diary</a></li>
             <li><a href="/picturebook/items/browse?tags=correspondence">Correspondence</a></li>
           </ul>
+    </ul>
+</ul>
 <h2><a href="/picturebook/items/browse?tags=literature">Literature</a></h2>
 <ul class="items">
   <li><a href="/picturebook/items/browse?tags=autobiography">Autobiography</a></li>
@@ -568,7 +566,7 @@
 </div>
 <hr>
 <div class="subject-list">
-<h1>Mathematics</h1>
+<span data-section="Mathematics"></span>
 
 <h2><a href="/picturebook/items/browse?tags=concepts">Concepts</a></h2>
 <ul class="items">
@@ -578,7 +576,7 @@
       <li><a href="/picturebook/items/browse?tags=capacity">Capacity</a></li>
     </ul>
   <li><a href="/picturebook/items/browse?tags=pattern">Pattern</a></li>
-  <li><a href="/picturebook/items/browse?tags=shape">Shape</a></li>
+  <li><a href="/picturebook/items/browse?tags=shapes">Shapes</a></li>
   <li><a href="/picturebook/items/browse?tags=variety">Variety</a></li>
 </ul>
 <h2><a href="/picturebook/items/browse?tags=time">Time</a></h2>
@@ -605,7 +603,7 @@
 </div>
 <hr>
 <div class="subject-list">
-<h1>Music</h1>
+<span data-section="Music"></span>
 
 <ul class="items">
   <li><a href="/picturebook/items/browse?tags=band">Band</a></li>
@@ -615,8 +613,8 @@
   <li><a href="/picturebook/items/browse?tags=opera">Opera</a></li>
   <li><a href="/picturebook/items/browse?tags=rhythm">Rhythm</a></li>
   <li><a href="/picturebook/items/browse?tags=song">Song</a></li>
-<h3><a href="/picturebook/items/browse?tags=+"> </a></h3>
     <ul class="subitems">
+      <li><a href="/picturebook/items/browse?tags=lyrics">Lyrics</a></li>
       <li><a href="/picturebook/items/browse?tags=singing">Singing</a></li>
       <li><a href="/picturebook/items/browse?tags=voice">Voice</a></li>
     </ul>
@@ -625,7 +623,7 @@
 </div>
 <hr>
 <div class="subject-list">
-<h1>Physical Education</h1>
+<span data-section="Physical Education"></span>
 
 <h2><a href="/picturebook/items/browse?tags=exercise">Exercise</a></h2>
 <ul class="items">
@@ -678,21 +676,17 @@
       <li><a href="/picturebook/items/browse?tags=soccer">Soccer</a></li>
       <li><a href="/picturebook/items/browse?tags=softball">Softball</a></li>
       <li><a href="/picturebook/items/browse?tags=swimming">Swimming</a></li>
-    </ul>
-</ul>
           <ul class="level-3s">
             <li><a href="/picturebook/items/browse?tags=swimming+pool">Swimming Pool</a></li>
           </ul>
-    <ul class="subitems">
       <li><a href="/picturebook/items/browse?tags=tennis">Tennis</a></li>
     </ul>
-<ul class="items">
   <li><a href="/picturebook/items/browse?tags=yoga">Yoga</a></li>
 </ul>
 </div>
 <hr>
 <div class="subject-list">
-<h1>Science</h1>
+<span data-section="Science"></span>
 
 <h2><a href="/picturebook/items/browse?tags=archeology">Archeology</a></h2>
 <ul class="items">
@@ -715,7 +709,7 @@
   <li><a href="/picturebook/items/browse?tags=space">Space</a></li>
   <li><a href="/picturebook/items/browse?tags=stars">Stars</a></li>
     <ul class="subitems">
-      <li><a href="/picturebook/items/browse?tags=constellations">Constellations</a></li>
+      <li><a href="/picturebook/items/browse?tags=constellation">Constellation</a></li>
     </ul>
   <li><a href="/picturebook/items/browse?tags=sun">Sun</a></li>
 </ul>
@@ -745,7 +739,7 @@
 </ul>
 <h2>Botany</h2>
 <ul class="items">
-  <li><a href="/picturebook/items/browse?tags=algae">algae</a></li>
+  <li><a href="/picturebook/items/browse?tags=algae">Algae</a></li>
   <li><a href="/picturebook/items/browse?tags=garden">Garden</a></li>
   <li><a href="/picturebook/items/browse?tags=nature">Nature</a></li>
   <li><a href="/picturebook/items/browse?tags=plants">Plants</a></li>
@@ -1088,7 +1082,7 @@
 </div>
 <hr>
 <div class="subject-list">
-<h1>Social Studies</h1>
+<span data-section="Social Studies"></span>
 
 <h2><a href="/picturebook/items/browse?tags=celebration">Celebration</a></h2>
 <ul class="items">
@@ -1118,7 +1112,7 @@
   <li><a href="/picturebook/items/browse?tags=village">Village</a></li>
   <li><a href="/picturebook/items/browse?tags=volunteer">Volunteer</a></li>
 </ul>
-<h2><a href="/picturebook/items/browse?tags=country+and+regions">Country and Regions</a></h2>
+<h2>Country and Regions</h2>
 <ul class="items">
   <li><a href="/picturebook/items/browse?tags=africa">Africa</a></li>
   <li><a href="/picturebook/items/browse?tags=america">America</a></li>
@@ -1291,7 +1285,9 @@
   <li><a href="/picturebook/items/browse?tags=stereotypes">Stereotypes</a></li>
   <li><a href="/picturebook/items/browse?tags=support">Support</a></li>
   <li><a href="/picturebook/items/browse?tags=understanding">Understanding</a></li>
-<h2><a href="/picturebook/items/browse?tags=multicultural">Multicultural</a></h2>
+</ul>
+<h2><a href="/picturebook/items/browse?tags=multicultural">Multicultural Identity and Language</a></h2>
+<ul class="items">
   <li><a href="/picturebook/items/browse?tags=aborigine">Aborigine</a></li>
   <li><a href="/picturebook/items/browse?tags=afghani">Afghani</a></li>
   <li><a href="/picturebook/items/browse?tags=african">African</a></li>
@@ -1415,7 +1411,7 @@
   <li><a href="/picturebook/items/browse?tags=school">School</a></li>
     <ul class="subitems">
       <li><a href="/picturebook/items/browse?tags=education">Education</a></li>
-      <li><a href="/picturebook/items/browse?tags=instruction">Instruction</a></li>
+      <li><a href="/picturebook/items/browse?tags=instructions">Instructions</a></li>
       <li><a href="/picturebook/items/browse?tags=teaching">Teaching</a></li>
     </ul>
   <li><a href="/picturebook/items/browse?tags=shopping">Shopping</a></li>
