@@ -105,11 +105,11 @@ function Formatter($line) {
         $GLOBALS['level3ListIsOpen'] = false;
         $prepend .= '          </ul>'.PHP_EOL;
     }
-    if ($GLOBALS['subListIsOpen'] && ($line['SubItem'] == null)) {
+    if ($GLOBALS['subListIsOpen'] && ($line['SubItem'] == null && $line['ItemLevel3'] == null)) {
         $GLOBALS['subListIsOpen'] = false;
         $prepend .= '    </ul>'.PHP_EOL;
     }
-    if ($GLOBALS['listIsOpen'] && ($line['Item'] == null) && $line['SubItem'] == null) {
+    if ($GLOBALS['listIsOpen'] && ($line['Item'] == null) && $line['SubItem'] == null && $line['ItemLevel3'] == null) {
         $GLOBALS['listIsOpen'] = false;
         $prepend .= '</ul>'.PHP_EOL;
     }
